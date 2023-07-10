@@ -1,6 +1,7 @@
+--------------GENERAL QUERIES ON ELECTION TABLE --------------------------------------
+
 -- describing the ELECTION table
 DESC ELECTION;
-
 
 -- TOTAL YEARS OF DATA AVAILABLE IN THE ELECTION TABLE
 SELECT 
@@ -38,9 +39,9 @@ FROM
 ORDER BY 
     PARTYABBRE;
 
-
+------------------------------------------------------------------------------------------------------------
 --------------------PERFORMANCE TUNING QUERIES ON ELECTION TABLE--------------------------------------------
-
+------------------------------------------------------------------------------------------------------------
 
 -- total count of female candidates participating each year
 SELECT 
@@ -82,9 +83,11 @@ GROUP BY
     YEAR,
     PARTYABBRE
 HAVING
-    PARTYABBRE = 'BJP' AND YEAR = 1984  -- no elections were held in the year 1987. hence we use the  year 1984
+    PARTYABBRE = 'BJP' AND YEAR = 1987  -- no elections were held in the year 1987
 ORDER BY
-    ST_NAME;
+    ST_NAME;                            -- hence the result for this query will be "no rows are fetched"
+
+
     
 -- TOTAL CANDIDATES PARTITCIPATED IN ELECTION IN EACH STATE IN THE YEAR 2004
 SELECT 
@@ -101,7 +104,6 @@ ORDER BY
     ST_NAME;
 
 -- FETCH THE TOP 5 PARTIES THAT GOT THE MOST VOTES IN UTTAR PRADESH IN THE YEAR 2014
---In the database, only five state election details are provided, which does not include Uttar Prdesh
 SELECT 
     PARTYNAME
 FROM (
@@ -110,12 +112,13 @@ FROM (
     FROM 
         ELECTION 
     WHERE 
-        ST_NAME = 'Uttar Pradesh' AND YEAR = 2014  
+        ST_NAME = 'Uttar Pradesh' AND YEAR = 2014  --In the database, only five state election details are provided,which does not include Uttar Prdesh
     GROUP BY 
         PARTYNAME
 )
 ORDER BY VOTES DESC
-FETCH FIRST 5 ROWS ONLY;
+FETCH FIRST 5 ROWS ONLY;                -- hence the result for this query will be "no rows are fetched"
+
 
 
 
@@ -134,3 +137,19 @@ FROM (
 )
 ORDER BY VOTES DESC
 FETCH FIRST 5 ROWS ONLY;
+
+--TOTAL VOTES BJP GOT IN EACH STATE IN THE YEAR 1984
+SELECT
+    ST_NAME,
+    SUM(TOTVOTPOLL) AS BJP_VOTES_OBTAINED,
+    SUM(ELECTORS) AS TOTAL_VOTES
+FROM
+    ELECTION
+GROUP BY 
+    ST_NAME,
+    YEAR,
+    PARTYABBRE
+HAVING
+    PARTYABBRE = 'BJP' AND YEAR = 1984  
+ORDER BY
+    ST_NAME;                            
