@@ -1,6 +1,101 @@
+---***** ELECTION TABLE DETAILS********
+
+
+---FETCHING ELECTION TABLE
 SELECT * FROM ELECTION;
+
+-- TOTAL STATE NAMES
+SELECT DISTINCT(ST_NAME)
+FROM ELECTION;
+
+----- TOTAL DATA AVAILABLE IN THE ELECTION TABLE ACCORDING TO YEAR
+SELECT DISTINCT(YEAR)
+FROM ELECTION
+ORDER BY YEAR;
+
+-- TOTAL STATE COUNT
+SELECT COUNT(DISTINCT(ST_NAME))
+FROM ELECTION;
+
+-- TOTAL AVAILABLE PARTIES IN THE ELECTION DATA
+SELECT DISTINCT(PARTYNAME)
+FROM ELECTION
+ORDER BY  PARTYNAME;
+
+--TOTAL AVAILABLE PARTY ABBREVIATIONS IN THE ELECTION TABLE
+SELECT DISTINCT(PARTYABBRE)
+FROM ELECTION
+ORDER BY PARTYABBRE;
+
+
+
+
+------********** ORACLE WORKSPACE ONLINE VOTING******************
+
+
 ------write a SQL query to find a total count of female candidates participating in each year
 SELECT YEAR, COUNT(*) AS FemaleCandidateCount
 FROM ELECTION
 WHERE CAND_SEX = 'F'
-GROUP BY YEAR;
+GROUP BY YEAR
+ORDER BY YEAR;
+
+
+------write a SQL query to find total candidates who participated in the election at each state in each year 
+SELECT ST_NAME, YEAR, COUNT(*) AS TotalCandidates
+FROM ELECTION
+GROUP BY ST_NAME, YEAR
+ORDER BY ST_NAME,YEAR;
+
+
+------write a SQL query to find total votes BJP got in each state in the year 1987?
+SELECT 
+    ST_NAME,
+    SUM(TOTVOTPOLL) AS BJP_VOTES_OBTAINED,
+    SUM(ELECTORS) AS TOTAL_VOTES
+FROM ELECTION
+GROUP BY ST_NAME,YEAR,PARTYABBRE
+HAVING PARTYABBRE = 'BJP' AND YEAR = 1987
+ORDER BY ST_NAME;
+---- Therefore According to the database no elections were held in the year 1987 so as a output it gives no rows fetched.
+-----so hence we use the  year 1984
+SELECT
+    ST_NAME,
+    SUM(TOTVOTPOLL) AS BJP_VOTES_OBTAINED,
+    SUM(ELECTORS) AS TOTAL_VOTES
+FROM ELECTION
+GROUP BY ST_NAME,YEAR,PARTYABBRE
+HAVING PARTYABBRE = 'BJP' AND YEAR = 1984
+ORDER BY ST_NAME;
+
+
+------ write a SQL query to find total candidates who participated in the election at each state in year 2004?
+SELECT ST_NAME, COUNT(*) AS TotalCandidates
+FROM ELECTION
+WHERE YEAR = 2004
+GROUP BY ST_NAME,YEAR
+ORDER BY ST_NAME;
+
+
+-------write a SQL query to what are the top 5 parties that got the most votes in Uttar Pradesh in the year 2014?
+SELECT PARTYNAME
+FROM (
+    SELECT  PARTYNAME, SUM(TOTVOTPOLL)AS VOTES
+    FROM ELECTION 
+    WHERE ST_NAME = 'Uttar Pradesh' AND YEAR = 2014  
+    GROUP BY PARTYNAME
+    )
+ORDER BY VOTES DESC
+FETCH FIRST 5 ROWS ONLY;
+------Therefore According to the database only five state election details were provided, which does not include Uttar Prdesh
+-----SO WE FETCH THE TOP 5 PARTIES THAT GOT THE MOST VOTES IN ANDHRA PRADESH IN THE YEAR 2014
+SELECT  PARTYNAME
+FROM (
+    SELECT  PARTYNAME, SUM(TOTVOTPOLL)AS VOTES
+    FROM ELECTION 
+    WHERE ST_NAME = 'Andhra Pradesh' AND YEAR = 2014  
+    GROUP BY  PARTYNAME
+    )
+ORDER BY VOTES DESC
+FETCH FIRST 5 ROWS ONLY
+
