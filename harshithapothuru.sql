@@ -138,7 +138,6 @@ WHERE ST_NAME = 'Tamil Nadu'
 ORDER BY YEAR;  --No results will found
                 --no records with the state Tamil Nadu in the database
 
---set 3
-
+--set 
 
 
