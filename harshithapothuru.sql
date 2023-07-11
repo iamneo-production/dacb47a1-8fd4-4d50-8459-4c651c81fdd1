@@ -3,13 +3,13 @@
 select * from election;
 
 --to get the details of state names from records
-select DISTINCT(st_name) from ELECTION;
+select DISTINCT st_name from ELECTION;
 
 --TO KNOW THE PARTYNAMES IN THE RECORD
-SELECT DISTINCT(PARTYNAME) FROM ELECTION;
+SELECT DISTINCT PARTYNAME FROM ELECTION;
 
 --TO KNOW HOW MANY YEARS ELECTIONS ARE HELD
-SELECT DISTINCT(YEAR) FROM ELECTION;
+SELECT DISTINCT YEAR FROM ELECTION;
 
 -----------------------------------------------------------------------------------------------------------------------------
 --                                     ***tuning preformance QUERIES***                                   --
@@ -102,9 +102,43 @@ SELECT ST_NAME
 FROM(
   SELECT ST_NAME, COUNT(*) AS LIST_BELOW_75
   FROM ELECTION
-  WHERE PARTYNAME = 'BJP' AND (TOTVOTPOLL*100/SUM(TOTVOTPOLL))<75
+  WHERE PARTYNAME = 'BJP' AND (TOTVOTPOLL*100/SUM(ELECTORS))<75
   GROUP BY ST_NAME
 )
 ORDER BY ST_NAME;
 
---
+--SET 2
+--To Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
+SELECT CAND_NAME AS BJP_CANDIDATE_LIST
+FROM ELECTION
+WHERE PARTYNAME = 'BJP' AND ST_NAME = 'Andaman & Nicobar Islands' AND YEAR = 1984;
+
+--To find count of Male Candidates participated in elections in each state
+SELECT ST_NAME, COUNT(*) AS Male_Candidates
+FROM ELECTION
+WHERE CAND_SEX = 'M'
+GROUP BY ST_NAME
+ORDER BY ST_NAME;
+
+--To Display the Party name in descending order
+SELECT DISTINCT PARTYNAME
+FROM ELECTION
+ORDER BY PARTYNAME DESC;
+
+
+--Count of Candidates participated in the state West Bengal in the year 1988
+SELECT COUNT(DISTINCT CAND_NAME) AS Total_Candidates
+FROM ELECTION
+WHERE ST_NAME = 'West Bengal' AND YEAR = 1988;  --count is 0 as no records with the state west bengal
+
+--To Display the Tamilnadu Candidate list each year
+SELECT DISTINCT YEAR, CAND_NAME
+FROM ELECTION
+WHERE ST_NAME = 'Tamil Nadu'
+ORDER BY YEAR;  --No results will found
+                --no records with the state Tamil Nadu in the database
+
+--set 3
+
+
+
