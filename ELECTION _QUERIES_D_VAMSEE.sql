@@ -3,8 +3,6 @@
 -- describing the ELECTION table
 DESC ELECTION;
 
-select * from election;
-
 -- TOTAL YEARS OF DATA AVAILABLE IN THE ELECTION TABLE
 SELECT 
     DISTINCT(YEAR)
@@ -123,6 +121,9 @@ FETCH FIRST 5 ROWS ONLY;                -- hence the result for this query will 
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------- EXTRA QUERIES ON ELECTION TABLE ----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- FETCH THE TOP 5 PARTIES THAT GOT THE MOST VOTES IN ANDHRA PRADESH IN THE YEAR 2014
 SELECT 
@@ -155,3 +156,87 @@ HAVING
     PARTYABBRE = 'BJP' AND YEAR = 1984  
 ORDER BY
     ST_NAME;                            
+
+-- SQL query to calculate total votes Got BJP in Bihar State in 1996
+SELECT
+    ST_NAME,
+    YEAR,
+    SUM(TOTVOTPOLL) AS TOTAL_VOTES
+FROM 
+    ELECTION
+GROUP BY 
+    ST_NAME,
+    YEAR
+HAVING  
+    ST_NAME = 'Bihar' AND YEAR = 1996;
+
+-- SQL query to display the BJP Candidates list in descending order
+SELECT 
+    YEAR,
+    CAND_NAME
+FROM
+    ELECTION
+WHERE 
+    PARTYABBRE = 'BJP'
+ORDER BY
+    YEAR DESC;
+
+-- SQL query to find how many times congress gets above 50% vote in Bihar state
+SELECT
+    COUNT(*) AS CONGRESS_VOTE
+FROM 
+    ELECTION
+WHERE
+    (TOTVOTPOLL/ELECTORS)*100 >50 AND
+    ST_NAME = 'Bihar' AND PARTYNAME = 'INC';
+
+--SQL query to find the Arunachal Pradesh Candidate list each year
+SELECT
+    CAND_NAME,
+    YEAR
+FROM
+    ELECTION
+WHERE
+    ST_NAME = 'Arunachal Pradesh'
+ORDER BY
+    YEAR;
+
+
+-- SQL query to find total male candidates who participated in the election
+SELECT
+    YEAR,
+    COUNT(*)
+FROM
+    ELECTION
+GROUP BY
+    YEAR,
+    CAND_SEX
+HAVING
+    CAND_SEX = 'M'
+ORDER BY
+    YEAR;
+
+-- How many Male Candidates participated in elections in each state?
+SELECT
+    YEAR,
+    ST_NAME,
+    COUNT(*)
+FROM
+    ELECTION
+GROUP BY
+    YEAR,
+    ST_NAME,
+    CAND_SEX
+HAVING
+    CAND_SEX = 'M'
+ORDER BY
+    YEAR, ST_NAME;
+
+-- Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
+SELECT 
+    CAND_NAME
+FROM 
+    ELECTION
+WHERE 
+    ST_NAME = 'Andaman & Nicobar Islands' AND PARTYABBRE = 'BJP' AND YEAR = 1984;
+
