@@ -12,7 +12,7 @@ WHERE PARTYABBRE = 'BJP'
 ORDER BY CAND_NAME DESC;
 
 
---  Number of times Congress gets above 50% vote in Bihar state
+--  Number of times Congress gets below 50% vote in Bihar state
 SELECT COUNT(*)
 FROM (
   SELECT YEAR, SUM(TOTVOTPOLL)/(SELECT SUM(TOTVOTPOLL) FROM election WHERE ST_NAME = 'Bihar' AND YEAR = election.YEAR) * 100 AS "CONGRESS_VOTE_PERCENT"
@@ -20,13 +20,13 @@ FROM (
   WHERE ST_NAME = 'Bihar' AND PARTYABBRE = 'INC'
   GROUP BY YEAR
 ) SUBQUERY
-WHERE "CONGRESS_VOTE_PERCENT" > 50;
+WHERE "CONGRESS_VOTE_PERCENT" < 50;
 
 
---  Sikkim Candidate list each year
+--  Assam Candidate list each year
 SELECT YEAR, CAND_NAME
 FROM election
-WHERE ST_NAME = 'Sikkim'
+WHERE ST_NAME = 'Assam'
 ORDER BY YEAR;
 
 
