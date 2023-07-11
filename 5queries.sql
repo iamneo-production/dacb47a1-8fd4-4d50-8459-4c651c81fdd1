@@ -18,3 +18,5 @@ select PARTYNAME,TOTVOTPOLL from ELECTION
 where st_name='uttar pradesh' and year = '2014'
 order by TOTVOTPOLL desc fetch first 5 rows only;
 
+
+select PARTYNAME from election order by PARTYNAME desc;
