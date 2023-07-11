@@ -84,28 +84,13 @@ WHERE ST_NAME='WEST BENGAL' AND YEAR=2014; -- NO RECORDS WITH STATE WEST BENGAL
 
 --TOTAL VOTES BJP GOT IN ANDHRA PRADESH IN THE YEAR 1987
 SELECT SUM(TOTVOTPOLL) FROM ELECTION 
-WHERE PARTYABBRE='BJP', ST_NAME='ANDHRA PRADESH', YEAR=1987; 
-
---NO. OF TIMES BJP GOT ABOVE 50% VOTE
-SELECT COUNT(*) 
-FROM ELECTION
-WHERE PARTYABBRE='BJP'
-GROUP BY YEAR
-HAVING TOTVOTPOLL>0.5*ELECTORS;
+WHERE PARTYABBRE='BJP' and ST_NAME='ANDHRA PRADESH'and YEAR=1987; 
+--there is no result as no election held in the year 1987
 
 -- total vote percentage of bjp IN GOA STATE IN YEAR 2003
 SELECT SUM(TOTVOTPOLL)/SUM(ELECTORS)*100 
-FROM ELECTION WHERE ST_NAME='GOA', YEAR=2003, PARTYABBRE='BJP';
-
---the state list the BJP gets below 75% vote
-SELECT ST_NAME
-FROM(
-  SELECT ST_NAME, COUNT(*) AS LIST_BELOW_75
-  FROM ELECTION
-  WHERE PARTYNAME = 'BJP' AND (TOTVOTPOLL*100/SUM(ELECTORS))<75
-  GROUP BY ST_NAME
-)
-ORDER BY ST_NAME;
+FROM ELECTION WHERE ST_NAME='GOA'and YEAR=2003 and PARTYABBRE='BJP';
+--no state name with gos in the database
 
 --SET 2
 --To Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
@@ -138,6 +123,6 @@ WHERE ST_NAME = 'Tamil Nadu'
 ORDER BY YEAR;  --No results will found
                 --no records with the state Tamil Nadu in the database
 
---set 
+--set 3
 
 
