@@ -4,7 +4,7 @@ desc election;  #---description of election table---#
 
 select * from election;  #---fetching data from election table---#
 
-***********General queries of election table*************
+#--------General queries of election table----------#
 
 select st_name from election;
 
@@ -14,7 +14,7 @@ select distinct(year) from election;
 
 select count(totvotpoll) from election group by year;
 
-************performance tuning queries on election table*****************
+#------------------performance tuning queries on election table------------------------#
 
 #----query to find total count of female candidates participating in each year----#
  select year,count(CAND_SEX) as female_candidates
@@ -34,7 +34,7 @@ select count(totvotpoll) from election group by year;
  FROM ELECTION
  WHERE PARTYNAME='BJP' and year=1987
  group by st_name;
-                         ****since,election didnot held in 1987 output will be no rows fetched****
+                         #----since,election didnot held in 1987 output will be no rows fetched----#
 
 
  #----query to find total candidates participated in the election in each state in year 2004----#
@@ -51,10 +51,8 @@ select count(totvotpoll) from election group by year;
             where ST_NAME='Uttar pradesh' and year=2014     
             order by  partyname desc))
 where slno<6;
-                         ****since,uttar pradesh is not in the table data, output will be no rows fetched****
+                         #----since,uttar pradesh is not in the table data, output will be no rows fetched----#
 
 
 
-
-   **************frequent queries on performance tuning*************
-   
+#--------------frequent queries on performance tuning--------------------#
