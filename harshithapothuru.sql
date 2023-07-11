@@ -65,7 +65,7 @@ FROM (SELECT PARTYNAME, SUM(TOTVOTPOLL) AS VOTES
     FETCH FIRST 5 ROWS ONLY;
     
 
---      **SET1**
+--EXTRA QUERIES WITH TURING PERFORMANCE
 --TOTAL CANDIDATES PARTICIPATED IN EACH STATE IN YEAR 2004
 SELECT ST_NAME,COUNT(*) AS TOTAL_CANDIDATES
 FROM ELECTION 
@@ -92,7 +92,7 @@ SELECT SUM(TOTVOTPOLL)/SUM(ELECTORS)*100
 FROM ELECTION WHERE ST_NAME='GOA'and YEAR=2003 and PARTYABBRE='BJP';
 --no state name with gos in the database
 
---SET 2
+
 --To Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
 SELECT CAND_NAME AS BJP_CANDIDATE_LIST
 FROM ELECTION
@@ -110,7 +110,6 @@ SELECT DISTINCT PARTYNAME
 FROM ELECTION
 ORDER BY PARTYNAME DESC;
 
-
 --Count of Candidates participated in the state West Bengal in the year 1988
 SELECT COUNT(DISTINCT CAND_NAME) AS Total_Candidates
 FROM ELECTION
@@ -123,6 +122,35 @@ WHERE ST_NAME = 'Tamil Nadu'
 ORDER BY YEAR;  --No results will found
                 --no records with the state Tamil Nadu in the database
 
---set 3
 
+--total votes Got BJP in Bihar State in 1996
+SELECT SUM(TOTVOTPOLL) AS TOTAL_VOTES
+FROM  ELECTION
+WHERE ST_NAME = 'Bihar' AND YEAR = 1996;
+
+--To display the BJP Candidates list in descending order
+SELECT distinct CAND_NAME
+FROM ELECTION
+WHERE PARTYNAME = 'BJP'
+ORDER BY CAND_NAME DESC;
+
+-----Write a SQL query to Find the Sikkim Candidate list each year?
+SELECT DISTINCT YEAR, CAND_NAME
+FROM ELECTION
+WHERE ST_NAME = 'Sikkim'
+ORDER BY YEAR;   --THERE IS NO records with the STATE NAME SIKKIM 
+
+
+--To Find total male candidates who participated in the election
+SELECT COUNT(DISTINCT CAND_NAME) AS TotalMaleCandidates
+FROM ELECTION
+WHERE CAND_SEX = 'M'
+ORDER BY CAND_NAME;
+
+--To Find total male candidates who participated in the election in each state and year
+SELECT YEAR, ST_NAME, COUNT(*)
+FROM ELECTION
+WHERE CAND_SEX = 'M'
+GROUP BY YEAR, ST_NAME,CAND_SEX
+ORDER BY YEAR, ST_NAME;
 
