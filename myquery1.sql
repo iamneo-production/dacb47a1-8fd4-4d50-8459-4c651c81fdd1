@@ -169,17 +169,7 @@ SELECT COUNT(DISTINCT CAND_NAME)
 FROM election
 WHERE "CAND_SEX" = 'M';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--  Total female candidates who participated in the election
+SELECT COUNT(DISTINCT CAND_NAME)
+FROM election
+WHERE "CAND_SEX" = 'F';
