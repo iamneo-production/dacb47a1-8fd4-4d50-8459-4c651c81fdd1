@@ -3,7 +3,6 @@ select * from election;
 
 -------------------------------oracle workspace queries-----------------------------------------
 
-
 1-- total female candidate participating each year
 SELECT YEAR, COUNT(DISTINCT CAND_NAME) as count
 FROM ELECTION
@@ -95,9 +94,35 @@ select  distinct partyname from election order by partyname desc;
 select count(distinct cand_name) from ELECTION where year= 1988
  and st_name='West Bengal';
 
-5-- tamilnadu candidate list each year
+5-- Assam candidate list each year
+select year,cand_name from election where 
+st_name='Assam';
+
+
+-------------------------performance tuning set-3 Queries--------------------------------------
+
+1--total male candidates participated in election each year
+
+select year,count(cand_name) from election where cand_sex='M'
+group by year;
+
+2--Sikkim Candidate list each year
 select year,cand_name from election where 
 st_name='Andhra Pradesh';
+
+3-- count of how many times congress got above 50% votes in bihar state
+
+select distinct(PARTYABBRE) from election;
+
+4--bjp candidate list in descending order
+select cand_name from election where partyabbre='BJP'
+order by cand_name desc;
+
+5--total votes bjp got in bihar state in 1996
+select sum(TOTVOTPOLL) as totalvotes from election where PARTYABBRE='BJP'
+and year=1996;
+
+
 
 
 
