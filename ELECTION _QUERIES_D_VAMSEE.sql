@@ -218,14 +218,14 @@ ORDER BY
 
 -- How many Male Candidates participated in elections in each state?
 SELECT
-    YEAR,
     ST_NAME,
+    YEAR,
     COUNT(*)
 FROM
     ELECTION
 GROUP BY
-    YEAR,
     ST_NAME,
+    YEAR,
     CAND_SEX
 HAVING
     CAND_SEX = 'M'
@@ -240,3 +240,55 @@ FROM
 WHERE 
     ST_NAME = 'Andaman & Nicobar Islands' AND PARTYABBRE = 'BJP' AND YEAR = 1984;
 
+
+-- How many times has BJP gotten an Above 50% vote
+SELECT
+    COUNT(*)
+FROM
+    (
+        SELECT  -- THIS QUERY PROVIDES THE TABLE OF VOTES OBTAINED BY BJP IN EACH STATE IN EVERY ELECTION
+            ST_NAME,
+            YEAR,
+            SUM(TOTVOTPOLL) AS TOTAL_VOTES,
+            SUM(ELECTORS) AS TOTAL_ELECTORS
+        FROM
+            ELECTION
+        GROUP BY
+            ST_NAME,
+            YEAR,
+            PARTYABBRE
+        HAVING
+            PARTYABBRE = 'BJP'
+        ORDER BY
+            ST_NAME,
+            YEAR
+    )
+WHERE 
+    (TOTAL_VOTES/TOTAL_ELECTORS)*100 >50;
+
+-- SQL QUERY TO FIND VOTE PERCENTAGE OF BJP IN EVERY STATE IN EACH ELECTION
+SELECT
+    ST_NAME,
+    YEAR,
+    ROUND((TOTAL_VOTES/TOTAL_ELECTORS)*100,2) AS BJP_VOTE_PERCENTAGE
+FROM
+    (
+        SELECT  -- THIS QUERY PROVIDES THE TABLE OF VOTES OBTAINED BY BJP IN EACH STATE IN EVERY ELECTION
+            ST_NAME,
+            YEAR,
+            SUM(TOTVOTPOLL) AS TOTAL_VOTES,
+            SUM(ELECTORS) AS TOTAL_ELECTORS
+        FROM
+            ELECTION
+        GROUP BY
+            ST_NAME,
+            YEAR,
+            PARTYABBRE
+        HAVING
+            PARTYABBRE = 'BJP'
+        ORDER BY
+            ST_NAME,
+            YEAR
+    );
+
+--
