@@ -23,5 +23,3 @@ select * from election where electors = 1001172;
 /* preformance tuning questions */
 /* sql query to find the total count of female candidates participating in each year */
 
-select year , count(*) as total female candidates
-  from election where cand_sex ='F' group by year;
