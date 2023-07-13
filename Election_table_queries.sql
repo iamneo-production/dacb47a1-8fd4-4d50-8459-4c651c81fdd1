@@ -1,3 +1,4 @@
+---intial queries-----------
 -- fetch data from table
 select * from election;
 -- table structure
@@ -51,7 +52,7 @@ order by totalvotes DESC
 FETCH FIRST 5 ROWS ONLY;
 
 ------------------------------Example Queries----------------------------------------------
-
+------------------------------------------------------------------------------------------------------
 --------------------performance tuning set1 queries-----------------------------------------------------
 
 1--totalvotes bjp party got in each state in year 1989
