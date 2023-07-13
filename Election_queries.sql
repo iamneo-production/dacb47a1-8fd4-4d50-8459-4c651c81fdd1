@@ -2,16 +2,16 @@
 select * from election;
 
 desc election;
-
+--Performance tuning set----
 
 -- Total female candidates participating each year
-SELECT YEAR, COUNT(DISTINCT CAND_NAME)
+SELECT YEAR, COUNT( CAND_NAME)
 FROM ELECTION
 WHERE CAND_SEX = 'F'
 GROUP BY YEAR;
 
 --Total candidates who participated in the election at each state in each year
-SELECT YEAR, ST_NAME, COUNT(DISTINCT CAND_NAME)
+SELECT YEAR, ST_NAME, COUNT( CAND_NAME)
 FROM ELECTION
 GROUP BY YEAR, ST_NAME;
 
@@ -24,7 +24,7 @@ GROUP BY ST_NAME;
 
 
 -- Total candidates who participated in the election in each state in the year 2004
-SELECT ST_NAME, COUNT(DISTINCT CAND_NAME)
+SELECT ST_NAME, COUNT(CAND_NAME)
 FROM ELECTION
 WHERE YEAR = 2004
 GROUP BY ST_NAME;
@@ -37,14 +37,15 @@ GROUP BY PARTYNAME
 ORDER BY TOTAL_VOTES DESC
 FETCH FIRST 5 ROWS ONLY; 
 
+--example queries on election table---
 
 --Total candidates who participated in West Bengal state in the year 2014
-SELECT COUNT(DISTINCT CAND_NAME)
+SELECT COUNT( CAND_NAME)
 FROM ELECTION
 WHERE ST_NAME = 'West Bengal' AND YEAR = 2014;
 
 --Total candidates who participated in Andhra Pradesh state in the year 2004
-SELECT COUNT(DISTINCT CAND_NAME)
+SELECT COUNT( CAND_NAME)
 FROM ELECTION
 WHERE ST_NAME = 'Andhra Pradesh' AND YEAR = 2004;
 
@@ -102,7 +103,7 @@ FROM election
 WHERE ST_NAME = 'Andhra Pradesh' AND PARTYABBRE = 'BJP' AND YEAR = 1984;
 
 --  How many Male Candidates participated in elections in each state
-SELECT ST_NAME, COUNT(DISTINCT CAND_NAME)
+SELECT ST_NAME, COUNT(CAND_NAME)
 FROM election
 WHERE CAND_SEX = 'M'
 GROUP BY ST_NAME;
@@ -113,12 +114,12 @@ FROM election
 ORDER BY PARTYNAME DESC;
 
 --  How many candidates participated in the year West Bengal 1988
-SELECT COUNT(DISTINCT CAND_NAME)
+SELECT COUNT( CAND_NAME)
 FROM election
 WHERE ST_NAME = 'West Bengal' AND YEAR = 1988;
 
 --  How many candidates participated in the year Assam 1998
-SELECT COUNT(DISTINCT CAND_NAME)
+SELECT COUNT( CAND_NAME)
 FROM election
 WHERE ST_NAME = 'Assam' AND YEAR = 1998;
 
@@ -177,11 +178,11 @@ ORDER BY YEAR;
 
 
 --  Total male candidates who participated in the election
-SELECT COUNT(DISTINCT CAND_NAME)
+SELECT COUNT(CAND_NAME)
 FROM election
 WHERE "CAND_SEX" = 'M';
 
 --  Total female candidates who participated in the election
-SELECT COUNT(DISTINCT CAND_NAME)
+SELECT COUNT(CAND_NAME)
 FROM election
 WHERE "CAND_SEX" = 'F';
