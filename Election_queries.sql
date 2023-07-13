@@ -2,7 +2,9 @@
 select * from election;
 
 desc election;
+-----------------------------------------------------------------------------------------
 --Performance tuning set----
+-------------------------------------------------------------------------------------------
 
 -- Total female candidates participating each year
 SELECT YEAR, COUNT( CAND_NAME)
@@ -37,7 +39,9 @@ GROUP BY PARTYNAME
 ORDER BY TOTAL_VOTES DESC
 FETCH FIRST 5 ROWS ONLY; 
 
+---------------------------------------------------------------------------------------------
 --example queries on election table---
+----------------------------------------------------------------------------------------------
 
 --Total candidates who participated in West Bengal state in the year 2014
 SELECT COUNT( CAND_NAME)
