@@ -39,5 +39,13 @@ SELECT ST_NAME,
 
      /* WRITE A SQL QUERY TO FIND WHAT ARE THE TOP 5 PARTIES THAT GOT THE MOST VOTES IN UTTAR PRADESH IN THE YEAR 2014*/
 
-     SELECT PARTYNAME ,SUM(TOTVOTPOLL) AS TOTAL_VOTES FROM ELECTION WHERE ST_NAME='UTTAR PRADESH' AND YEAR=2014
-           ORDER BY TOTAL_VOTES DESC  LIMIT 5;
+      
+       SELECT PARTYNAME ,SUM(TOTVOTPOLL) AS TOP_PARTIES FROM ELECTION WHERE ST_NAME='UTTAR PRADESH' AND YEAR=2014
+                 GROUP BY PARTYNAME ORDER BY TOP_PARTIES DESC FETCH FIRST 5 ROWS ONLY ;
+                 
+    select sum(totvotpoll) as Most_votes,PARTYABBRE
+      from election                                              /* FOR THE GIVEN QUESTION THERE IS NO DATA GIVEN 
+      where st_name='Uttar Pradesh' and year=2014                       IN THE TABLE TO FETCH THE RECORDS */    
+      group by partyabbre
+      order by Most_votes desc
+      fetch first 5 rows only;
