@@ -7,6 +7,7 @@ desc election;
 -------------------------------oracle workspace queries-----------------------------------------
 
 1-- total female candidate participating each year
+set timing on;
 select year, COUNT(CAND_NAME) as count
 from ELECTION
 where CAND_SEX = 'F'
@@ -36,18 +37,18 @@ where year=2004
 group by ST_NAME;
 
 5--top5 parties got the most votes in uttarpradesh in year 2014
-Select PARTYNAME from (select PARTYNAME, sum(TOTVOTPOLL) 
+select partyname from(select PARTYNAME, sum(TOTVOTPOLL) 
 as totalvotes from ELECTION
-where ST_NAME = 'uttar Pradesh' and  year = 1977
-group by PARTYNAME) 
+where ST_NAME = 'uttar Pradesh' and  year = 2014
+group by PARTYNAME)
 order by totalvotes DESC
 FETCH FIRST 5 ROWS ONLY;
 --for the above query as there is no state named uttatpradesh
 --replacing the state name can give us the output
-Select PARTYNAME from (select PARTYNAME, sum(TOTVOTPOLL) 
+select partyname from(select PARTYNAME, sum(TOTVOTPOLL) 
 as totalvotes from ELECTION
-where ST_NAME = 'Andhra Pradesh' and  year = 1977
-group by PARTYNAME) 
+where ST_NAME = 'Andhra Pradesh' and  year = 2014
+group by PARTYNAME)
 order by totalvotes DESC
 FETCH FIRST 5 ROWS ONLY;
 
