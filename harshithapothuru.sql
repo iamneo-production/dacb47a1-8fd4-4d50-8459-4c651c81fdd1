@@ -39,11 +39,6 @@ GROUP BY ST_NAME, YEAR
 HAVING YEAR= 2004 
 ORDER BY ST_NAME;
 
-/*SELECT ST_NAME, COUNT(*) AS TOTAL_CANDIDATES
-FROM ELECTION WHERE YEAR=2004
-GROUP BY ST_NAME
-ORDER BY ST_NAME;
-*/
 
 --FETCH TOP 5 PARTIES THAT GOT THE MOST VOTES IN UTTAR PRADESH IN THE YEAR 2014
 SELECT PARTYNAME 
@@ -88,8 +83,17 @@ WHERE PARTYABBRE='BJP' and ST_NAME='ANDHRA PRADESH'and YEAR=1987;
 -- total vote percentage of bjp IN GOA STATE IN YEAR 2003
 SELECT SUM(TOTVOTPOLL)/SUM(ELECTORS)*100 
 FROM ELECTION WHERE ST_NAME='GOA'and YEAR=2003 and PARTYABBRE='BJP';
---no state name with gos in the database
+--no state name with goa in the database
 
+--Number of times has BJP gotten an above 50% votes.
+SELECT count(*) AS count_above_50
+FROM ELECTION
+WHERE PARTYABBRE='BJP' AND ((TOTVOTPOLL/electors)*100)<50;
+    
+--The state list the BJP gets below 75% vote.
+SELECT DISTINCT(st_name) AS state_list
+FROM ELECTION
+WHERE PARTYABBRE='BJP' and  ((totvotpoll/ELECTORS)*100)<75; 
 
 --To Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
 SELECT CAND_NAME AS BJP_CANDIDATE_LIST
