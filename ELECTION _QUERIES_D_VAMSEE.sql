@@ -42,15 +42,19 @@ ORDER BY
 ------------------------------------------------------------------------------------------------------------
 --------------------PERFORMANCE TUNING QUERIES ON ELECTION TABLE--------------------------------------------
 ------------------------------------------------------------------------------------------------------------
+-- INDEXES 
+CREATE INDEX ELECTION_YEAR_STATE_IDX ON ELECTION(YEAR,ST_NAME);
+
 
 -- total count of female candidates participating each year
+
 SELECT 
     YEAR,
     COUNT(*) AS FEMALE_CANDIDATES
 FROM 
     ELECTION
 WHERE
-    CAND_SEX = 'F'
+    CAND_SEX = 'F' AND YEAR IS NOT NULL
 GROUP BY 
     YEAR
 ORDER BY 
@@ -64,6 +68,8 @@ SELECT
     COUNT(*) AS TOTAL_CANDIDATES
 FROM 
     ELECTION
+WHERE 
+    YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY
     ST_NAME,
     YEAR
@@ -78,6 +84,8 @@ SELECT
     SUM(ELECTORS) AS TOTAL_VOTES
 FROM
     ELECTION
+WHERE 
+    YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY 
     ST_NAME,
     YEAR,
@@ -95,6 +103,8 @@ SELECT
     COUNT(*) AS TOTAL_CANDIDATES
 FROM 
     ELECTION
+WHERE 
+    YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY 
     ST_NAME,
     YEAR
@@ -148,6 +158,8 @@ SELECT
     SUM(ELECTORS) AS TOTAL_VOTES
 FROM
     ELECTION
+WHERE 
+    YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY 
     ST_NAME,
     YEAR,
@@ -164,6 +176,8 @@ SELECT
     SUM(TOTVOTPOLL) AS TOTAL_VOTES
 FROM 
     ELECTION
+WHERE 
+    YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY 
     ST_NAME,
     YEAR
@@ -177,7 +191,7 @@ SELECT
 FROM
     ELECTION
 WHERE 
-    PARTYABBRE = 'BJP'
+    PARTYABBRE = 'BJP' AND YEAR IS NOT NULL
 ORDER BY
     YEAR DESC;
 
@@ -188,7 +202,8 @@ FROM
     ELECTION
 WHERE
     (TOTVOTPOLL/ELECTORS)*100 >50 AND
-    ST_NAME = 'Bihar' AND PARTYNAME = 'INC';
+    ST_NAME = 'Bihar' AND PARTYNAME = 'INC'
+    AND ST_NAME IS NOT NULL ;
 
 --SQL query to find the Arunachal Pradesh Candidate list each year
 SELECT
@@ -197,7 +212,7 @@ SELECT
 FROM
     ELECTION
 WHERE
-    ST_NAME = 'Arunachal Pradesh'
+    ST_NAME = 'Arunachal Pradesh' AND YEAR IS NOT NULL
 ORDER BY
     YEAR;
 
@@ -208,6 +223,8 @@ SELECT
     COUNT(*)
 FROM
     ELECTION
+WHERE 
+    YEAR IS NOT NULL
 GROUP BY
     YEAR,
     CAND_SEX
@@ -223,6 +240,8 @@ SELECT
     COUNT(*)
 FROM
     ELECTION
+WHERE 
+    YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY
     ST_NAME,
     YEAR,
@@ -253,6 +272,8 @@ FROM
             SUM(ELECTORS) AS TOTAL_ELECTORS
         FROM
             ELECTION
+        WHERE 
+            YEAR IS NOT NULL AND ST_NAME IS NOT NULL
         GROUP BY
             ST_NAME,
             YEAR,
@@ -280,6 +301,8 @@ FROM
             SUM(ELECTORS) AS TOTAL_ELECTORS
         FROM
             ELECTION
+        WHERE 
+            YEAR IS NOT NULL AND ST_NAME IS NOT NULL
         GROUP BY
             ST_NAME,
             YEAR,
@@ -291,4 +314,4 @@ FROM
             YEAR
     );
 
---
+
