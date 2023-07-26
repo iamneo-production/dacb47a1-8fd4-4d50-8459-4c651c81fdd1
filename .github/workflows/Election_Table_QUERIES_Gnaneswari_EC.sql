@@ -90,7 +90,7 @@ select partyname
             from election
             where ST_NAME='Assam' and year=2014     
             order by  partyname desc))
- where slno<6;
+where slno<6;
 
 -----------query to calculate Total votes got BJP in bihar state in 1996--------------
 select sum(TOTVOTPOLL)
