@@ -1,6 +1,6 @@
 --fetch data from the table
 select * from election;
-
+--describes the table--
 desc election;
 
 SELECT DISTINCT(ST_NAME)
