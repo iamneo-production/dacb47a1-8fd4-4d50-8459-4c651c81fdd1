@@ -49,10 +49,7 @@ select count(totvotpoll) from election group by year;
             from election
             where ST_NAME='Uttar pradesh' and year=2014     
             order by  partyname desc))
-where slno<6;
-                         #----since,uttar pradesh is not in the table data, output will be no rows fetched----#
-
-
+where slno<6;   #----since,uttar pradesh is not in the table data, output will be no rows fetched----#
 
 #--------------frequent queries on performance tuning--------------------#
 
@@ -108,7 +105,7 @@ group by st_name,year;
     ORDER by CAND_NAME desc; 
 
 -----------TOTAL VOTES BJP GOT IN EACH STATE IN THE YEAR 1984----------------
-SELECTST_NAME,SUM(TOTVOTPOLL) AS BJP_VOTES_OBTAINED,SUM(ELECTORS) AS TOTAL_VOTES
+SELECT ST_NAME,SUM(TOTVOTPOLL) AS BJP_VOTES_OBTAINED,SUM(ELECTORS) AS TOTAL_VOTES
 FROM ELECTION
 WHERE YEAR IS NOT NULL AND ST_NAME IS NOT NULL
 GROUP BY ST_NAME,YEAR,PARTYABBRE
