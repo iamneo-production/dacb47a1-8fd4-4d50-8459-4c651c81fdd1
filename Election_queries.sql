@@ -3,6 +3,23 @@ select * from election;
 
 desc election;
 
+SELECT DISTINCT(ST_NAME)
+FROM ELECTION;
+
+SELECT DISTINCT(PARTYABBRE)
+FROM ELECTION;
+
+SELECT COUNT(*)
+FROM ELECTION;
+
+SELECT DISTINCT(PARTYNAME)
+FROM ELECTION;
+
+SELECT DISTINCT(PC_TYPE)
+FROM ELECTION;
+
+SELECT DISTINCT(PC_NAME)
+FROM ELECTION;
 -----------------------------------------------------------------------------------------
 --Performance tuning set----
 -------------------------------------------------------------------------------------------
