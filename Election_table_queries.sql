@@ -5,9 +5,7 @@ select * from election;
 desc election;
 
 -------------------------------oracle workspace queries-----------------------------------------
-
 1-- total female candidate participating each year
-set timing on;
 select year, COUNT(CAND_NAME) as count
 from ELECTION
 where CAND_SEX = 'F'
@@ -23,12 +21,7 @@ select ST_NAME,sum(TOTVOTPOLL)
 as totalvotes from election where
  PARTYABBRE='BJP' and year=1987
 group by ST_NAME;
---no rows will be fetched by the above query as no data available----------------------
-----changing year to 1989 will give an output--------------------------------
-select ST_NAME,sum(TOTVOTPOLL) 
-as totalvotes from election where
- PARTYABBRE='BJP' and year=1989
-group by ST_NAME;
+--no rows will be fetched by the above query as no elections were held in 1987----------------------
 
 4--total candidates who participated in election in each state in year 2004
 select ST_NAME,count(cand_name) as count 
@@ -43,14 +36,7 @@ where ST_NAME = 'uttar Pradesh' and  year = 2014
 group by PARTYNAME)
 order by totalvotes DESC
 FETCH FIRST 5 ROWS ONLY;
---for the above query as there is no state named uttatpradesh
---replacing the state name can give us the output
-select partyname from(select PARTYNAME, sum(TOTVOTPOLL) 
-as totalvotes from ELECTION
-where ST_NAME = 'Andhra Pradesh' and  year = 2014
-group by PARTYNAME)
-order by totalvotes DESC
-FETCH FIRST 5 ROWS ONLY;
+--for the above query  no rows are selected as there is no state named uttatpradesh
 
 ------------------------------Example Queries----------------------------------------------
 ------------------------------------------------------------------------------------------------------
