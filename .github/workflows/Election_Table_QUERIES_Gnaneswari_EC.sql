@@ -36,7 +36,6 @@ select count(totvotpoll) from election group by year;
  group by st_name;
                          #----since,election didnot held in 1987 output will be no rows fetched----#
 
-
  #----query to find total candidates participated in the election in each state in year 2004----#
  select st_name,count(cand_name) as total_candidates
  from election
