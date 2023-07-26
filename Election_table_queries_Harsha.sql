@@ -159,16 +159,16 @@
 
 
 --1. To calculate Total votes got BJP in bihar state in 1996.
-select sum(TOTVOTPOLL)
-from ELECTION
-where st_name='Bihar' and year=1996 and PARTYABBRE='BJP'
-group by st_name,year;
+      select sum(TOTVOTPOLL)
+      from ELECTION
+      where st_name='Bihar' and year=1996 and PARTYABBRE='BJP'
+      group by st_name,year;
 
 --2. To display the BJP candidates list in descending order.
       select distinct(cand_name)
-    from election
-    where partyabbre='BJP'
-    ORDER by CAND_NAME desc; 
+      from election
+      where partyabbre='BJP'
+      ORDER by CAND_NAME desc; 
 
 --3. Find how many times congress gets above 50% vote in bihar state.
      select count(*)
