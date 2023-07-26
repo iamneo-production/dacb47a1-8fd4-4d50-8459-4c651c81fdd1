@@ -136,7 +136,7 @@ FROM ELECTION
 WHERE PARTYNAME = 'BJP'
 ORDER BY CAND_NAME DESC;
 
------Write a SQL query to Find the Sikkim Candidate list each year?
+-----Write a SQL query to Find the Sikkim Candidate list each year
 SELECT DISTINCT YEAR, CAND_NAME
 FROM ELECTION
 WHERE ST_NAME = 'Sikkim'
