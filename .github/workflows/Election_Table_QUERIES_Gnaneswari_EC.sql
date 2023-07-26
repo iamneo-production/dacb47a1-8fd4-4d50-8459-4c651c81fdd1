@@ -94,3 +94,66 @@ select partyname
             where ST_NAME='Assam' and year=2014     
             order by  partyname desc))
 where slno<6;
+
+-----------query to calculate Total votes got BJP in bihar state in 1996--------------
+select sum(TOTVOTPOLL)
+from ELECTION
+where st_name='Bihar' and year=1996 and PARTYABBRE='BJP'
+group by st_name,year;
+
+---------query to display the BJP candidates list in descending order----------------
+    select distinct(cand_name)
+    from election
+    where partyabbre='BJP'
+    ORDER by CAND_NAME desc; 
+
+-----------TOTAL VOTES BJP GOT IN EACH STATE IN THE YEAR 1984----------------
+SELECTST_NAME,SUM(TOTVOTPOLL) AS BJP_VOTES_OBTAINED,SUM(ELECTORS) AS TOTAL_VOTES
+FROM ELECTION
+WHERE YEAR IS NOT NULL AND ST_NAME IS NOT NULL
+GROUP BY ST_NAME,YEAR,PARTYABBRE
+HAVING PARTYABBRE = 'BJP' AND YEAR = 1984  
+ORDER BY ST_NAME;                            
+
+------------- SQL query to calculate total votes Got BJP in Bihar State in 1996----------------
+SELECT ST_NAME,YEAR,SUM(TOTVOTPOLL) AS TOTAL_VOTES
+FROM  ELECTION
+WHERE  YEAR IS NOT NULL AND ST_NAME IS NOT NULL
+GROUP BY ST_NAME,YEAR
+HAVING  ST_NAME = 'Bihar' AND YEAR = 1996;
+
+------------- SQL query to display the BJP Candidates list in descending order--------------------
+SELECT YEAR,CAND_NAME
+FROM ELECTION
+WHERE PARTYABBRE = 'BJP' AND YEAR IS NOT NULL
+ORDER BY YEAR DESC;
+
+---------------- SQL query to find how many times congress gets above 50% vote in Bihar state----------------
+SELECT COUNT(*) AS CONGRESS_VOTE
+FROM ELECTION
+WHERE (TOTVOTPOLL/ELECTORS)*100 >50 AND
+ST_NAME = 'Bihar' AND PARTYNAME = 'INC'
+AND ST_NAME IS NOT NULL ;
+
+-----------------SQL query to find the Arunachal Pradesh Candidate list each year--------------------
+SELECT CAND_NAME,YEAR
+FROM ELECTION
+WHERE ST_NAME = 'Arunachal Pradesh' AND YEAR IS NOT NULL
+ORDER BY YEAR;
+
+---------------- SQL query to find total male candidates who participated in the election---------------------
+SELECT YEAR,COUNT(*)
+FROM ELECTION
+WHERE YEAR IS NOT NULL
+GROUP BY YEAR,CAND_SEX
+HAVING CAND_SEX = 'M'
+ORDER BY YEAR;
+
+----------- query to display how many Male Candidates participated in elections in each state------------------------
+SELECT ST_NAME,YEAR,COUNT(*)
+FROM ELECTION
+WHERE YEAR IS NOT NULL AND ST_NAME IS NOT NULL
+GROUP BY ST_NAME,YEAR,CAND_SEX
+HAVING CAND_SEX = 'M'
+ORDER BY YEAR, ST_NAME;
+
