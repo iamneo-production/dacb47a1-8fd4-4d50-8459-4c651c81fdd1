@@ -149,6 +149,7 @@ FROM ELECTION
 WHERE CAND_SEX = 'M'
 ORDER BY CAND_NAME;
 
+
 --To Find total male candidates who participated in the election in each state and year
 SELECT YEAR, ST_NAME, COUNT(*)
 FROM ELECTION
