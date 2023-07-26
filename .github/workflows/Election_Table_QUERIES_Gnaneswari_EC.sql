@@ -14,7 +14,7 @@ select distinct(year) from election;
 
 select count(totvotpoll) from election group by year;
 
-#------------------performance tuning queries on election table------------------------#
+#-------------------performance tuning queries on election table------------------------#
 
 #----query to find total count of female candidates participating in each year----#
  select year,count(CAND_SEX) as female_candidates
@@ -90,7 +90,7 @@ select partyname
             from election
             where ST_NAME='Assam' and year=2014     
             order by  partyname desc))
-where slno<6;
+ where slno<6;
 
 -----------query to calculate Total votes got BJP in bihar state in 1996--------------
 select sum(TOTVOTPOLL)
