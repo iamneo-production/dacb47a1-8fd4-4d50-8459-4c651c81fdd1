@@ -3,6 +3,8 @@
 -- describing the ELECTION table
 DESC ELECTION;
 
+select * from election;
+
 -- TOTAL YEARS OF DATA AVAILABLE IN THE ELECTION TABLE
 SELECT 
     DISTINCT(YEAR)
@@ -313,5 +315,6 @@ FROM
             ST_NAME,
             YEAR
     );
+
 
 
