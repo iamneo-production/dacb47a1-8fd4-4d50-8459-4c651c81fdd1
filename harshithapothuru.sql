@@ -1,6 +1,4 @@
 
---to view the records in election
-select * from election;
 
 --to get the details of state names from records
 select DISTINCT st_name from ELECTION;
@@ -17,7 +15,7 @@ SELECT DISTINCT YEAR FROM ELECTION;
 --total count of female candidates participating in each year
 SELECT YEAR, COUNT(*) AS FEMALE_CANDIDATES
 FROM ELECTION WHERE CAND_SEX='F'
-GROUP BY YEAR ORDER BY YEAR;
+GROUP BY YEAR ORDER BY YEAR ASC;
  
 -- TOTAL CANDIDATES PARTICIPATED AT EACH STATE IN EACH YEAR
 SELECT ST_NAME, YEAR, COUNT(*) AS TOTAL_CANDIDATES
@@ -29,7 +27,7 @@ SELECT ST_NAME, YEAR, COUNT(*) AS TOTAL_CANDIDATES
 SELECT ST_NAME,SUM(TOTVOTPOLL) AS TOTAL_VOTES
 FROM ELECTION WHERE YEAR=1987 AND PARTYABBRE='BJP' 
 GROUP BY ST_NAME, YEAR, PARTYABBRE
-order by st_name;         -- 'no records found' will be result
+order by st_name ASC;         -- 'no records found' will be result
                           -- as no election held in the year 1987
 
 --total candidates participated in election in each state in the year 2004
@@ -37,7 +35,7 @@ SELECT ST_NAME, COUNT(*) AS TOTAL_CANDIDATES
 FROM ELECTION 
 GROUP BY ST_NAME, YEAR
 HAVING YEAR= 2004 
-ORDER BY ST_NAME;
+ORDER BY ST_NAME ASC;
 
 
 --FETCH TOP 5 PARTIES THAT GOT THE MOST VOTES IN UTTAR PRADESH IN THE YEAR 2014
@@ -82,7 +80,8 @@ WHERE PARTYABBRE='BJP' and ST_NAME='ANDHRA PRADESH'and YEAR=1987;
 
 -- total vote percentage of bjp IN GOA STATE IN YEAR 2003
 SELECT SUM(TOTVOTPOLL)/SUM(ELECTORS)*100 
-FROM ELECTION WHERE ST_NAME='GOA'and YEAR=2003 and PARTYABBRE='BJP';
+FROM ELECTION 
+WHERE ST_NAME='GOA'and YEAR=2003 and PARTYABBRE='BJP';
 --no state name with goa in the database
 
 --Number of times has BJP gotten an above 50% votes.
@@ -105,7 +104,7 @@ SELECT ST_NAME, COUNT(*) AS Male_Candidates
 FROM ELECTION
 WHERE CAND_SEX = 'M'
 GROUP BY ST_NAME
-ORDER BY ST_NAME;
+ORDER BY ST_NAME ASC;
 
 --To Display the Party name in descending order
 SELECT DISTINCT PARTYNAME
@@ -121,7 +120,7 @@ WHERE ST_NAME = 'West Bengal' AND YEAR = 1988;  --count is 0 as no records with 
 SELECT DISTINCT YEAR, CAND_NAME
 FROM ELECTION
 WHERE ST_NAME = 'Tamil Nadu'
-ORDER BY YEAR;  --No results will found
+ORDER BY YEAR ASC;  --No results will found
                 --no records with the state Tamil Nadu in the database
 
 
@@ -140,14 +139,14 @@ ORDER BY CAND_NAME DESC;
 SELECT DISTINCT YEAR, CAND_NAME
 FROM ELECTION
 WHERE ST_NAME = 'Sikkim'
-ORDER BY YEAR;   --THERE IS NO records with the STATE NAME SIKKIM 
+ORDER BY YEAR ASC;   --THERE IS NO records with the STATE NAME SIKKIM 
 
 
 --To Find total male candidates who participated in the election
 SELECT COUNT(DISTINCT CAND_NAME) AS TotalMaleCandidates
 FROM ELECTION
 WHERE CAND_SEX = 'M'
-ORDER BY CAND_NAME;
+ORDER BY CAND_NAME ASC;
 
 
 --To Find total male candidates who participated in the election in each state and year
@@ -155,4 +154,4 @@ SELECT YEAR, ST_NAME, COUNT(*)
 FROM ELECTION
 WHERE CAND_SEX = 'M'  
 GROUP BY YEAR, ST_NAME,CAND_SEX
-ORDER BY YEAR, ST_NAME;
+ORDER BY YEAR, ST_NAME ASC;
