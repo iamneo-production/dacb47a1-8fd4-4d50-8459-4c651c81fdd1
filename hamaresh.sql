@@ -1,5 +1,4 @@
 desc election;
-select * from election;
 --WRITE A SQL QUERY TO FIND THE TOTAL COUNT OF FEMALE CANDIDATES   PARTICIPATING EACH YEAR 
 SELECT 
     YEAR,
@@ -11,7 +10,7 @@ WHERE
 GROUP BY 
     YEAR
 ORDER BY 
-    YEAR;
+    YEAR ASC;
 --FIND THE TOTAL CANDIDATES WHO PARTICIPATED IN THE ELECTION AT EACH STATE IN EACH YEAR
 SELECT 
     ST_NAME,
@@ -23,8 +22,8 @@ GROUP BY
     ST_NAME,
     YEAR
 ORDER BY
-    ST_NAME,
-    YEAR;
+    ST_NAME ASC,
+    YEAR ASC;
 --WRITE SQL QUERY TO FIND THE TOTAL VOTES BJP GOT IN EACH STATE IN THE YEAR 1987 
 SELECT
     ST_NAME,
@@ -39,7 +38,7 @@ GROUP BY
 HAVING
     PARTYABBRE = 'BJP' AND YEAR = 1987  
 ORDER BY
-    ST_NAME;  
+    ST_NAME ASC;  
 --.WRITE SQL QUERY TO FIND THE TOTAL CANDIDATES PARTITCIPATED IN ELECTION IN EACH STATE IN THE YEAR 2004 
 SELECT 
     ST_NAME,
@@ -52,7 +51,7 @@ GROUP BY
 HAVING
     YEAR = 2004
 ORDER BY 
- ST_NAME;
+ ST_NAME ASC;
 --WRITE SQL QUERY TO FETCH THE TOP 5 PARTIES THAT GOT THE MOST VOTES IN UTTAR PRADESH IN THE YEAR 2014 
   SELECT 
     PARTYNAME
@@ -99,8 +98,7 @@ select electors from election;
 select max(electors) from election;
 select min(electors) from election;
 select avg(electors) from election;
---create view on election table
-create view view_ele as select * from election;
+
 --fetch the record from view table
 select electors from view_ele;
 select max(electors) from view_ele;
