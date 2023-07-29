@@ -1,5 +1,3 @@
---fetch data from the table
-select * from election;
 --describes the table--
 desc election;
 
@@ -66,10 +64,10 @@ SELECT COUNT( CAND_NAME)
 FROM ELECTION
 WHERE ST_NAME = 'West Bengal' AND YEAR = 2014;
 
---Total candidates who participated in Andhra Pradesh state in the year 2004
+--Total candidates who participated in Arunachal Pradesh state in the year 2004
 SELECT COUNT( CAND_NAME)
 FROM ELECTION
-WHERE ST_NAME = 'Andhra Pradesh' AND YEAR = 2004;
+WHERE ST_NAME = 'Arunachal Pradesh' AND YEAR = 2004;
 
 --Total votes BJP Got in state Andhra Pradesh in the year 1987
 SELECT SUM(TOTVOTPOLL) AS TOTAL_VOTES
@@ -77,10 +75,10 @@ FROM ELECTION
 WHERE ST_NAME = 'Andhra Pradesh' AND PARTYABBRE = 'BJP' 
 AND YEAR = 1987;
 
---Total votes BJP Got in state Andhra Pradesh in the year 1989
+--Total votes BJP Got in the year 1989
 SELECT SUM(TOTVOTPOLL) AS TOTAL_VOTES
 FROM ELECTION
-WHERE ST_NAME = 'Andhra Pradesh' AND PARTYABBRE = 'BJP'
+WHERE PARTYABBRE = 'BJP'
  AND YEAR = 1989;
 
  -- Number of times BJP has gotten an Above 50% vote
@@ -135,32 +133,32 @@ SELECT DISTINCT PARTYNAME
 FROM election
 ORDER BY PARTYNAME DESC;
 
---  How many candidates participated in the year West Bengal 1988
+--  How many candidates participated in the year West Bengal
 SELECT COUNT( CAND_NAME)
 FROM election
-WHERE ST_NAME = 'West Bengal' AND YEAR = 1988;
+WHERE ST_NAME = 'West Bengal';
 
---  How many candidates participated in the year Assam 1998
+--  How many candidates participated in the year  1998
 SELECT COUNT( CAND_NAME)
 FROM election
-WHERE ST_NAME = 'Assam' AND YEAR = 1998;
+WHERE YEAR = 1998;
 
 --  Display the Tamilnadu Candidate list each year
 SELECT YEAR, CAND_NAME
 FROM election
 WHERE ST_NAME = 'Tamilnadu'
-ORDER BY YEAR;
+ORDER BY YEAR asc;
 
 --  Display the Bihar Candidate list each year
 SELECT YEAR, CAND_NAME
 FROM election
 WHERE ST_NAME = 'Bihar'
-ORDER BY YEAR;
+ORDER BY YEAR asc;
 
---  Total votes got BJP in Bihar State in 1996
+--  Total votes got BJP in 1996
 SELECT SUM(TOTVOTPOLL) AS "TOTAL_VOTES"
 FROM election
-WHERE ST_NAME = 'Bihar' AND PARTYABBRE = 'BJP' AND 
+WHERE PARTYABBRE = 'BJP' AND 
 YEAR = 1996;
 
 
@@ -176,7 +174,7 @@ SELECT COUNT(*)
 FROM (
   SELECT YEAR, SUM(TOTVOTPOLL)/(SELECT SUM(TOTVOTPOLL) FROM election WHERE ST_NAME = 'Bihar' AND YEAR = election.YEAR) * 100 AS "CONGRESS_VOTE_PERCENT"
   FROM election
-  WHERE ST_NAME = 'Bihar' AND PARTYABBRE = 'INC'
+  WHERE  PARTYABBRE = 'INC'
   GROUP BY YEAR
 ) SUBQUERY
 WHERE "CONGRESS_VOTE_PERCENT" < 50;
@@ -186,7 +184,7 @@ SELECT COUNT(*)
 FROM (
   SELECT YEAR, SUM(TOTVOTPOLL)/(SELECT SUM(TOTVOTPOLL) FROM election WHERE ST_NAME = 'Bihar' AND YEAR = election.YEAR) * 100 AS "CONGRESS_VOTE_PERCENT"
   FROM election
-  WHERE ST_NAME = 'Bihar' AND PARTYABBRE = 'INC'
+  WHERE PARTYABBRE = 'INC'
   GROUP BY YEAR
 ) SUBQUERY
 WHERE "CONGRESS_VOTE_PERCENT" = 50;
@@ -196,7 +194,7 @@ WHERE "CONGRESS_VOTE_PERCENT" = 50;
 SELECT YEAR, CAND_NAME
 FROM election
 WHERE ST_NAME = 'Assam'
-ORDER BY YEAR;
+ORDER BY YEAR asc;
 
 
 --  Total male candidates who participated in the election
