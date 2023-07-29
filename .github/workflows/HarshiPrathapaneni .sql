@@ -1,43 +1,51 @@
-my sql
+HarshiPrathapaneni
 
-Select * from election;
+#--DISPLAYING ELECTION TABLE IN DATABASE --#
 
-#--Performance Tuning Set-1--#
+    DESC ELECTION;
 
-/* write an sql query to find the total count of female candidates participating in each year*/
+#--OBTAINING ALL ROWS IN THE ELECTION TABLE--#
+
+    select * from election;
+
+                                   /*--ONLINE VOTING QUERIES GIVEN IN ORACLE WORKSPACE--*/
+
+/*1) write an sql query to find the total count of female candidates participating in each year*/
 
 select year,count(cand_name)as total_female_candidates
 from ELECTION where cand_sex='F'
 group by year;
 
-/*write an sql query to find the total candidates who participated in the election at each state in each year*/
+/*2)write an sql query to find the total candidates who participated in the election at each state in each year*/
 
 select st_name,year,count(CAND_NAME) as total_candidates
 from election 
 group by st_name,year
 order by year;
 
-/*write an sql query to find the total votes that bjp got in each state in the year 1967*/
+/*3)write an sql query to find the total votes that bjp got in each state in the year 1967*/
 
-select ST_NAME,totvotpoll
-from election where partyname='bjp' and year=1967
-group by st_name,totvotpoll;
+select ST_NAME,sum(totvotpoll) as total_bjp_votes
+from election where partyabbre='BJP' and year=1967
+group by st_name
+order by st_name;
 
-/*write an sql query to find the total candidates who participated in the election in each state in year 2004*/
+/*4)write an sql query to find the total candidates who participated in the election in each state in year 2004*/
 
 select ST_NAME,count(CAND_NAME)as total_candidates
 from election where year=2004
 group by ST_NAME;
 
-/*write an sql query to what are the top 5 parties  that got the most votes in uttar pradesh in year 2014?*/
-
-select PARTYNAME,totvotpoll
-from election where year=2014 and st_name='Uttar Pradesh'
-group by PARTYNAME,totvotpoll
-order by TOTVOTPOLL
+/*5)write an sql query to what are the top 5 parties  that got the most votes in uttar pradesh in year 2014?*/
+select partyname 
+from(
+    select PARTYNAME,sum(totvotpoll) as votes
+    from election where year=2014 and st_name='Uttar Pradesh'
+    group by PARTYNAME
+    order by TOTVOTPOLL desc)   
 fetch first 5 rows only;
 
-                            /*--PERFORMANCE TUNING QUESTIONS--*/
+                              /*--PERFORMANCE TUNING QUESTIONS--*/
 
 --1.Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984?
 select cand_name
