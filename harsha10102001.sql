@@ -4,8 +4,6 @@
 --To know the Election table structure 
   desc election;
 
--- To fetch all the data from the Election Table
-   select * from ELECTION;
 
 --1.To know the NUmber of states in the Election Table
    select distinct(st_name) from election;    --it shows names of the states
@@ -25,7 +23,7 @@
 
 --Total party Abbrevations in the election Table
   select distinct(PARTYABBRE) from election
-   order by partyabbre;                         --This query shows the output of party Abbrevations in the Election Table.
+   order by partyabbre ASC;                         --This query shows the output of party Abbrevations in the Election Table.
 
    select count(distinct(PARTYABBRE)) from election;  --This query shows the output of count/number of Parties abbrevations available.  
 
@@ -44,7 +42,7 @@
 --2. To Find the Total candidates who participated in the election at each state in each year.
     select count(CAND_NAME),st_name,year from election
     group by st_name,year
-    order by st_name,year;     
+    order by st_name ASC,year ASC;     
       --This query shows the output of count of candidates participating in the Elections in each state and each year.  
 
 --3. To find the total votes BJP in each state in the year 1987.
@@ -93,10 +91,10 @@
      group by st_name;
 
 
---7.To find the total votes BJP got in the state 'ANDHRA PRADESH' in the year 1984.
+--7.To find the total votes BJP got  in the year 1984.
     select sum(TOTVOTPOLL) as Total_votes
     from ELECTION
-    where st_name='Andhra Pradesh' and year=1984
+    where  year=1984
     group by st_name;
 
 --8. Find the Total vote percentage of BJP get in AP state in the year 2004.
@@ -158,10 +156,10 @@
 -----------------------------------------------------------------------------------------------------------------
 
 
---1. To calculate Total votes got BJP in bihar state in 1996.
+--1. To calculate Total votes got BJP  in 1996.
       select sum(TOTVOTPOLL)
       from ELECTION
-      where st_name='Bihar' and year=1996 and PARTYABBRE='BJP'
+      where  year=1996 and PARTYABBRE='BJP'
       group by st_name,year;
 
 --2. To display the BJP candidates list in descending order.
@@ -170,10 +168,10 @@
       where partyabbre='BJP'
       ORDER by CAND_NAME desc; 
 
---3. Find how many times congress gets above 50% vote in bihar state.
+--3. Find how many times congress gets above 50% vote.
      select count(*)
      from election
-     where PARTYABBRE='INC' and st_name='Bihar' and ((totvotpoll/ELECTORS)*100)<50;
+     where PARTYABBRE='INC'  and ((totvotpoll/ELECTORS)*100)<50;
   
 
 
