@@ -74,7 +74,7 @@ GROUP BY
     ST_NAME,
     YEAR
 ORDER BY
-    ST_NAME,
+    ST_NAME ASC,
     YEAR ASC;
 
 --TOTAL VOTES BJP GOT IN EACH STATE IN THE YEAR 1987
@@ -249,7 +249,8 @@ GROUP BY
 HAVING
     CAND_SEX = 'M'
 ORDER BY
-    YEAR, ST_NAME ASC;
+    YEAR ASC, 
+    ST_NAME ASC;
 
 -- Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
 SELECT 
@@ -281,7 +282,7 @@ FROM
         HAVING
             PARTYABBRE = 'BJP'
         ORDER BY
-            ST_NAME,
+            ST_NAME ASC,
             YEAR ASC
     )
 WHERE 
@@ -310,7 +311,7 @@ FROM
         HAVING
             PARTYABBRE = 'BJP'
         ORDER BY
-            ST_NAME,
+            ST_NAME ASC,
             YEAR ASC
     );
 
