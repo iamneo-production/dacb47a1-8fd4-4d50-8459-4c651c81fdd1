@@ -161,8 +161,8 @@ SELECT ST_NAME,SUM(TOTVOTPOLL) AS TOTAL_VOTES
       FROM ELECTION
          WHERE ST_NAME='Tamilnadu' 
             ORDER BY YEAR ASC;
-                                   -- THERE IS NO STATE CALLED TAMILNADU 
-                                          --SO WE REPLACE WITH BIHAR 
+                                               -- THERE IS NO STATE CALLED TAMILNADU 
+                                                --SO WE REPLACE WITH BIHAR 
     SELECT DISTINCT YEAR,CAND_NAME 
       FROM ELECTION
         WHERE ST_NAME='KERALA'
