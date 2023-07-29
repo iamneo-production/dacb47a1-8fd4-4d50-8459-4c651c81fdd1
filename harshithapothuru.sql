@@ -72,11 +72,6 @@ HAVING CAND_SEX='F';
 SELECT COUNT(*) FROM ELECTION
 WHERE ST_NAME='WEST BENGAL' AND YEAR=2014; -- NO RECORDS WITH STATE WEST BENGAL
 
---TOTAL VOTES BJP GOT IN ANDHRA PRADESH IN THE YEAR 1987
-SELECT SUM(TOTVOTPOLL) FROM ELECTION 
-WHERE PARTYABBRE='BJP' and ST_NAME='ANDHRA PRADESH'and YEAR=1987; 
---there is no result as no election held in the year 1987
-
 -- total vote percentage of bjp IN GOA STATE IN YEAR 2003
 SELECT SUM(TOTVOTPOLL)/SUM(ELECTORS)*100 
 FROM ELECTION 
@@ -88,15 +83,15 @@ SELECT count(*) AS count_above_50
 FROM ELECTION
 WHERE PARTYABBRE='BJP' AND ((TOTVOTPOLL/electors)*100)<50;
     
---The state list the BJP gets below 75% vote.
+--The state list the INC gets below 75% vote.
 SELECT DISTINCT(st_name) AS state_list
 FROM ELECTION
-WHERE PARTYABBRE='BJP' and  ((totvotpoll/ELECTORS)*100)<75; 
+WHERE PARTYABBRE='INC' and  ((totvotpoll/ELECTORS)*100)<75; 
 
---To Display the BJP candidate list participated at state Andaman & Nicobar Islands in the year 1984
+--To Display the TDP candidate list participated at state Andaman & Nicobar Islands in the year 1984
 SELECT CAND_NAME AS BJP_CANDIDATE_LIST
 FROM ELECTION
-WHERE PARTYNAME = 'BJP' AND ST_NAME = 'Andaman & Nicobar Islands' AND YEAR = 1984;
+WHERE PARTYNAME = 'TDP' AND ST_NAME = 'Andaman & Nicobar Islands' AND YEAR = 1984;
 
 --To find count of Male Candidates participated in elections in each state
 SELECT ST_NAME, COUNT(*) AS Male_Candidates
@@ -128,10 +123,10 @@ SELECT SUM(TOTVOTPOLL) AS TOTAL_VOTES
 FROM  ELECTION
 WHERE ST_NAME = 'Bihar' AND YEAR = 1996;
 
---To display the BJP Candidates list in descending order
+--To display the INC Candidates list in descending order
 SELECT distinct CAND_NAME
 FROM ELECTION
-WHERE PARTYNAME = 'BJP'
+WHERE PARTYNAME = 'INC'
 ORDER BY CAND_NAME DESC;
 
 -----Write a SQL query to Find the Sikkim Candidate list each year
@@ -153,5 +148,5 @@ SELECT YEAR, ST_NAME, COUNT(*)
 FROM ELECTION
 WHERE CAND_SEX = 'M'  
 GROUP BY YEAR, ST_NAME,CAND_SEX
-ORDER BY YEAR, ST_NAME ASC;
+ORDER BY YEAR ASC, ST_NAME ASC;
 
