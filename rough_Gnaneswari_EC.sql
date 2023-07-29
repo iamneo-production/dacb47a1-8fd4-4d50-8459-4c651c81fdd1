@@ -1,4 +1,4 @@
-Election_Table_QUERIES_Gnaneswari_EC
+rough_Gnaneswari_EC
 
 desc election;  #---description of election table---#
 
@@ -14,15 +14,11 @@ select distinct(year) from election;
 
 select count(totvotpoll) from election group by year;
 
-<<<<<<< Updated upstream
-#-------------------performance tuning queries on election table------------------------#
-=======
 <<<<<<< HEAD
 #------------------performance tuning queries on election table------------------------#
 =======
 #-------------------performance tuning queries on election table------------------------#
 >>>>>>> origin/Oracle-Workspace-gnaneswariec
->>>>>>> Stashed changes
 
 #----query to find total count of female candidates participating in each year----#
  select year,count(CAND_SEX) as female_candidates

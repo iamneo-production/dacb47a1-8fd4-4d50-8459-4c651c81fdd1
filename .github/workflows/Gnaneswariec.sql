@@ -1,4 +1,4 @@
-Election_Table_QUERIES_Gnaneswari_EC
+Gnaneswariec
 
 desc election;  #---description of election table---#
 
@@ -14,15 +14,8 @@ select distinct(year) from election;
 
 select count(totvotpoll) from election group by year;
 
-<<<<<<< Updated upstream
+
 #-------------------performance tuning queries on election table------------------------#
-=======
-<<<<<<< HEAD
-#------------------performance tuning queries on election table------------------------#
-=======
-#-------------------performance tuning queries on election table------------------------#
->>>>>>> origin/Oracle-Workspace-gnaneswariec
->>>>>>> Stashed changes
 
 #----query to find total count of female candidates participating in each year----#
  select year,count(CAND_SEX) as female_candidates
@@ -58,6 +51,8 @@ select count(totvotpoll) from election group by year;
             where ST_NAME='Uttar pradesh' and year=2014     
             order by  partyname desc))
 where slno<6;   #----since,uttar pradesh is not in the table data, output will be no rows fetched----#
+
+
 
 #--------------frequent queries on performance tuning--------------------#
 
