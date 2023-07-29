@@ -6,7 +6,7 @@ HarshiPrathapaneni
 
 #--OBTAINING ALL ROWS IN THE ELECTION TABLE--#
 
-    select * from election;
+    
 
                                    /*--ONLINE VOTING QUERIES GIVEN IN ORACLE WORKSPACE--*/
 
