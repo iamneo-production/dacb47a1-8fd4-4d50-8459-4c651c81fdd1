@@ -106,33 +106,33 @@ from election
 where partyname='BJP' and  ((totvotpoll/ELECTORS)*100)<75; 
 
 
-/*11.Write a SQL query to calculate total votes Got by BJP in Bihar State in 1996?*/
+--11.Write a SQL query to calculate total votes Got by BJP in Bihar State in 1996?*/
 
 select st_name,year,sum(totvotpoll) as total_bjp_votess`
 from election where st_name='Bihar' and year=1996
 group by st_name,year;
 
 
-/*12. Write a SQL query to display the BJP Candidates list in descending order?*/
+--12. Write a SQL query to display the BJP Candidates list in descending order?*/
 
 select CAND_NAME
 from election where PARTYABBRE='BJP'
 order by cand_name desc;
 
-/*13. Find how many times congress gets above 50% vote in Bihar state?*/
+--13. Find how many times congress gets above 50% vote in Bihar state?*/
 
 select count(distinct year) as  Num_of_Times
 from election
 where st_name = 'Bihar' and partyabbre = 'INC' and (totvotpoll / electors * 100) > 50;
 
-/*14. Find the Sikkim Candidate list each year?*/
+--14. Find the Sikkim Candidate list each year?*/
 
 select distinct year, cand_name
 from election
 where st_name = 'Sikkim'
 order by year asc;
 
-/*15. Find total male candidates who participated in the election?*/
+--15. Find total male candidates who participated in the election?*/
 
 select cand_name
 from election
