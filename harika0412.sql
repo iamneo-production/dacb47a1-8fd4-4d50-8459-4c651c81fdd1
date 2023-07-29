@@ -1,6 +1,4 @@
 ---intial queries-----------
--- fetch data from table
-select * from election;
 -- table structure
 desc election;
 
@@ -48,44 +46,34 @@ from ELECTION
 where year=1989 and PARTYABBRE='BJP'
 group by st_name;
 
-2--total candidates who participated from Arunachal Pradesh in year 2014
-select count(distinct CAND_NAME) as candidatecount 
-from election
-where ST_NAME='Arunachal Pradesh' and year=2014;
 
-3--total votes bjp got in state of Andhra Pradesh in year 1989
+2--total candidates whose party is BRP
+select count( CAND_NAME) as candidatecount 
+from election
+where partyabbre='BRP';
+
+3--total votes bjp got in year 1989
 
 select sum(TOTVOTPOLL) as totalvotes 
 from ELECTION
-where ST_NAME='Andhra Pradesh' and year= 1989
+where  year= 1989
 and partyabbre='BJP';
 
-4--total vote percentage bjp got in state of Andhra Pradesh in 1989
-select (sum(TOTVOTPOLL)/sum(ELECTORS))*100 as votepercentage
-from election 
-where ST_NAME = 'Andhra Pradesh' and year=1989
-and PARTYABBRE='BJP';
-
-5-- how many times bjp has gotten below 50% votes
+4-- how many times bjp has gotten below 50% votes
 select count(*) as count 
 from ELECTION
 where PARTYABBRE='BJP'
 and ((TOTVOTPOLL/ELECTORS)*100)<50;
 
-6--state list of bjp where it gets 75% below votes
+5--state list of bjp where it gets 75% below votes
 select ST_NAME as state 
 from election 
 where PARTYABBRE='BJP' and ((totvotpoll/electors)*100)<75;
 
-7-- state list where bjp got below 60% below vote
+6-- state list where bjp got below 60% below vote
 select ST_NAME as state 
 from election 
 where PARTYABBRE='BJP' and ((totvotpoll/electors)*100)<60;
-
-8--total candidates who participated in Arunachal Pradesh in year 2014
-select count(cand_name) as candidate_count
-from election 
-where st_name='Arunachal Pradesh' and year=2014;
 
 
 -----------------------performance tuning set2 queries--------------------------------------------
@@ -107,11 +95,10 @@ select  distinct partyname
 from election
 order by partyname desc;
 
-4--candidates participated in year 1988 in west bengal
+4--candidates participated in year 1988
 select count(cand_name) as count
 from ELECTION 
-where year= 1984
-and st_name='Arunachal Pradesh';
+where year= 1984;
 
 5-- Assam candidate list each year
 select year,cand_name as candidatename from election 
@@ -130,10 +117,10 @@ from election
 where cand_sex='M'
 group by year;
 
-2--Andhra Pradesh Candidate list each year
+2--IND Candidate list each year
 select year,cand_name as candidatename
 from election 
-where st_name='Andhra Pradesh';
+where partyabbre='IND';
 
 3-- count of how many times congress got above 50% votes in bihar state
 select count(*) as count 
