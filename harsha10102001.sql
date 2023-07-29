@@ -129,7 +129,7 @@
     where st_name='Andaman & Nicobar islands' and year=1984 and PARTYNAME='BJP';      
 
 --  2.How many Male candidates participated in elections in each state.
-    select  count(*),ST_NAME
+    select  count(CAND_NAME),ST_NAME
     from ELECTION
     where CAND_SEX='M'
     group by st_name;    
@@ -169,7 +169,7 @@
       ORDER by CAND_NAME desc; 
 
 --3. Find how many times congress gets above 50% vote.
-     select count(*)
+     select count(cand_name)
      from election
      where PARTYABBRE='INC'  and ((totvotpoll/ELECTORS)*100)<50;
   
