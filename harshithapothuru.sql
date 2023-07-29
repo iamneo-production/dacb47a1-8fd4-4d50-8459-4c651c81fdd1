@@ -1,5 +1,4 @@
 
-
 --to get the details of state names from records
 select DISTINCT st_name from ELECTION;
 
@@ -155,3 +154,4 @@ FROM ELECTION
 WHERE CAND_SEX = 'M'  
 GROUP BY YEAR, ST_NAME,CAND_SEX
 ORDER BY YEAR, ST_NAME ASC;
+
