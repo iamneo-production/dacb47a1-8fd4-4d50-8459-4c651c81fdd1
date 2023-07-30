@@ -1,4 +1,4 @@
-HarshiPrathapaneni sql
+--HarshiPrathapaneni sql
 
 --DISPLAYING ELECTION TABLE IN DATABASE --
 
@@ -39,7 +39,7 @@ from(
     select PARTYNAME,sum(totvotpoll) as votes
     from election where year=2014 and st_name='Uttar Pradesh'
     group by PARTYNAME
-    order by TOTVOTPOLL desc)   
+    )   
 fetch first 5 rows only;
 
                               --PERFORMANCE TUNING QUESTIONS--
@@ -108,7 +108,7 @@ where partyname='BJP' and  ((totvotpoll/ELECTORS)*100)<75;
 
 --11.Write a SQL query to calculate total votes Got by BJP in Bihar State in 1996?*/
 
-select st_name,year,sum(totvotpoll) as total_bjp_votess`
+select st_name,year,sum(totvotpoll) as total_bjp_votess
 from election where st_name='Bihar' and year=1996
 group by st_name,year;
 

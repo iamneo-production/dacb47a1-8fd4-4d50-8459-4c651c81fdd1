@@ -94,7 +94,7 @@ FROM (
     GROUP BY  PARTYNAME
     )
 ORDER BY VOTES DESC
-FETCH FIRST 5 ROWS ONLY
+FETCH FIRST 5 ROWS ONLY;
 
 
 -------************PERFORMANCE TUNING SET-1***********-----------------
