@@ -5,6 +5,7 @@ HarshiPrathapaneni sql
     DESC ELECTION;
 
 
+
                                    --ONLINE VOTING QUERIES GIVEN IN ORACLE WORKSPACE
 
 --1) write an sql query to find the total count of female candidates participating in each year
