@@ -1,4 +1,4 @@
-Harshi sql
+HarshiPrathapaneni
 
 --DISPLAYING ELECTION TABLE IN DATABASE --
 
